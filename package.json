@@ -1,0 +1,32 @@
+{
+  "name": "fschat-server",
+  "version": "1.0.0",
+  "description": "Backend for a chat application based on socket.io",
+  "main": "./src/app.js",
+  "repository": "git@github.com:ezisezis/fschat-server.git",
+  "author": "Eduards Klavins <klavins.eduards@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.16.3",
+    "mkdirp": "0.5.1",
+    "socket.io": "2.1.1",
+    "winston": "3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "5.2.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-prettier": "2.6.2",
+    "nodemon": "1.18.3",
+    "pre-commit": "1.2.2",
+    "prettier": "1.14.0"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "start:dev": "NODE_ENV=development nodemon src/app.js",
+    "lint": "./node_modules/.bin/eslint .",
+    "lint:fix": "yarn lint --fix"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
