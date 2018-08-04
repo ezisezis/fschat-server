@@ -2,7 +2,7 @@ const isUsernameValid = username => {
   return /^\S{2,20}$/.test(username);
 };
 
-const usernameTaken = (connectedUsers, username) => {
+const isUsernameTaken = (connectedUsers, username) => {
   let taken = false;
   connectedUsers.forEach(key => {
     const index = key.indexOf("__");
@@ -16,5 +16,5 @@ const usernameTaken = (connectedUsers, username) => {
 
 module.exports = {
   isUsernameValid,
-  usernameTaken
+  isUsernameTaken
 };

@@ -30,7 +30,7 @@ io.on("connection", socket => {
     handleDisconnect(socket, "NO_USERNAME");
   } else if (connectedUsersCache.get(`${socket.id}__${username}`)) {
     handleDisconnect(socket, "ID_TAKEN");
-  } else if (utilities.usernameTaken(connectedUsersCache.keys(), username)) {
+  } else if (utilities.isUsernameTaken(connectedUsersCache.keys(), username)) {
     handleDisconnect(socket, "USERNAME_TAKEN");
   } else {
     connectedUsersCache.set(`${socket.id}__${username}`, {
@@ -39,7 +39,7 @@ io.on("connection", socket => {
     });
     logger.info("User connected", { username });
     socket.emit("connect_success");
-    io.emit("user_joined", { username });
+    socket.broadcast.emit("user_joined", { username });
   }
 
   socket.on("message", data => {
