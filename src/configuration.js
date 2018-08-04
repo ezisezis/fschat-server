@@ -3,5 +3,9 @@ module.exports = {
     level: "info",
     logdir: "logs"
   },
-  port: 8080
+  port: 8080,
+  cache: {
+    userConnectionTTL: 300,
+    checkperiod: 30
+  }
 };
