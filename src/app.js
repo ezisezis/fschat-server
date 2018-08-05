@@ -26,15 +26,21 @@ io.on("connection", socket => {
   try {
     const username = escapeHtml(socket.handshake.query.username);
     if (!utilities.isUsernameValid(username)) {
-      handleDisconnect(socket, "INVALID_USERNAME");
+      handleDisconnect(socket, "Failed connection attempt. Invalid username.");
     } else if (!socket.handshake.query.username) {
-      handleDisconnect(socket, "NO_USERNAME");
+      handleDisconnect(
+        socket,
+        "Failed connection attempt. No username provided."
+      );
     } else if (connectedUsersCache.get(`${socket.id}__${username}`)) {
-      handleDisconnect(socket, "ID_TAKEN");
+      handleDisconnect(socket, "Failed connection attempt. Socket ID taken.");
     } else if (
       utilities.isUsernameTaken(connectedUsersCache.keys(), username)
     ) {
-      handleDisconnect(socket, "USERNAME_TAKEN");
+      handleDisconnect(
+        socket,
+        "Failed connection attempt. Username already taken."
+      );
     } else {
       connectedUsersCache.set(`${socket.id}__${username}`, {
         username,
